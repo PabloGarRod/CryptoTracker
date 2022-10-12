@@ -1,7 +1,13 @@
 import React, { Component} from "react";
 import {View, Text, Pressable, StyleSheet} from "react-native";
+import Http from "CryptoTracker/src/libs/http";
 
 class CoinsScreen extends Component {
+
+    componentDidMount = async () => {
+        const coins = await Http.instance.get("https://api.coinlore.net/api/tickers/");
+        console.log("coins", coins);
+    }
 
     handlePress = () => {
         console.log("go to detail", this.props)
@@ -16,6 +22,7 @@ class CoinsScreen extends Component {
                 >
                     Coins Screen
                 </Text>
+
                 <Pressable
                     style={styles.btn} 
                     onPress={this.handlePress}
